@@ -18,6 +18,7 @@ func _ready() -> void:
 		set_process(false)
 		changed.connect(_changed, 1)
 	# Update full tileset on first instance
+	await get_tree().process_frame
 	_changed()
 
 

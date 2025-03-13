@@ -4,6 +4,15 @@ class_name TileMapDual
 extends TileMapLayer
 
 
+## Material for the display tilemap.
+@export_custom(PROPERTY_HINT_RESOURCE_TYPE, "ShaderMaterial,CanvasItemMaterial")
+var display_material: Material:
+	get:
+		return display_material
+	set(new_material): # Custom setter so that it gets copied
+		display_material = new_material
+		changed.emit()
+
 var _tileset_watcher: TileSetWatcher
 var _display: Display
 func _ready() -> void:
@@ -16,7 +25,7 @@ func _ready() -> void:
 		set_process(true)
 	else: # Run in-game using signals for better performance
 		set_process(false)
-		changed.connect(_changed, 1)
+	changed.connect(_changed, 1)
 	# Update full tileset on first instance
 	await get_tree().process_frame
 	_changed()
@@ -36,11 +45,14 @@ func _atlas_autotiled(source_id: int, atlas: TileSetAtlasSource):
 ## The main tiles don't need to be seen. Only the DisplayLayers should be visible.
 ## Called on ready.
 func _make_self_invisible() -> void:
+	# If user has set a material in the original slot, copy it over for redundancy
+	# Helps both migration to new version, and prevents user mistakes
 	if material != null:
-		return
-	material = CanvasItemMaterial.new()
-	material.light_mode = CanvasItemMaterial.LightMode.LIGHT_MODE_LIGHT_ONLY
-
+		display_material = material
+		material = CanvasItemMaterial.new()
+		material.light_mode = CanvasItemMaterial.LightMode.LIGHT_MODE_LIGHT_ONLY
+	# Override modulation to prevent render bugs with certain shaders
+	self_modulate.a = 0.0
 
 ## HACK: How long to wait before processing another "frame"
 @export_range(0.0, 0.1) var refresh_time: float = 0.02
@@ -52,16 +64,22 @@ func _process(delta: float) -> void: # Only used inside the editor
 		_timer -= delta
 		return
 	_timer = refresh_time
-	call_deferred('_changed')
+	call_deferred('_watch')
+
+
+## Called when the TileMapLayer changes.
+func _changed() -> void:
+	_watch()
+	_make_self_invisible()
 
 
 ## Called by signals when the tileset changes,
 ## or by _process inside the editor.
-func _changed() -> void:
+func _watch() -> void:
 	_tileset_watcher.update(tile_set)
-	_display.update(self)
+	_display.update()
 
-
+	
 ## Public method to add and remove tiles.
 ##
 ## 'cell' is a vector with the cell position.

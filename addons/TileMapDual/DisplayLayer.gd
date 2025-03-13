@@ -69,7 +69,6 @@ func update_properties(parent: TileMapDual) -> void:
 		self.self_modulate = parent.self_modulate
 	# self_modulate will be fixed by the parent later
 
-	parent.material = null # Unset TileMapDual's material, to prevent render of it
 
 ## Updates all display tiles to reflect the current changes.
 func update_tiles_all(cache: TileCache) -> void:

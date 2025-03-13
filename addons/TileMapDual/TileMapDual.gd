@@ -24,8 +24,8 @@ func _ready() -> void:
 		_tileset_watcher.atlas_autotiled.connect(_atlas_autotiled, 1)
 		set_process(true)
 	else: # Run in-game using signals for better performance
+		changed.connect(_changed, 1)
 		set_process(false)
-	changed.connect(_changed, 1)
 	# Update full tileset on first instance
 	await get_tree().process_frame
 	_changed()
@@ -49,10 +49,11 @@ func _make_self_invisible() -> void:
 	# Helps both migration to new version, and prevents user mistakes
 	if material != null:
 		display_material = material
-		material = CanvasItemMaterial.new()
-		material.light_mode = CanvasItemMaterial.LightMode.LIGHT_MODE_LIGHT_ONLY
+		material = null # Unset TileMapDual's material, to prevent render of it
+
 	# Override modulation to prevent render bugs with certain shaders
-	self_modulate.a = 0.0
+	if self_modulate.a != 0.0:
+		self_modulate.a = 0.0
 
 ## HACK: How long to wait before processing another "frame"
 @export_range(0.0, 0.1) var refresh_time: float = 0.02
@@ -64,20 +65,15 @@ func _process(delta: float) -> void: # Only used inside the editor
 		_timer -= delta
 		return
 	_timer = refresh_time
-	call_deferred('_watch')
-
-
-## Called when the TileMapLayer changes.
-func _changed() -> void:
-	_watch()
-	_make_self_invisible()
+	call_deferred('_changed')
 
 
 ## Called by signals when the tileset changes,
 ## or by _process inside the editor.
-func _watch() -> void:
+func _changed() -> void:
 	_tileset_watcher.update(tile_set)
 	_display.update()
+	_make_self_invisible()
 
 	
 ## Public method to add and remove tiles.

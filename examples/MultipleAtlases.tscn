@@ -1,13 +1,10 @@
-[gd_scene load_steps=10 format=4 uid="uid://lxo6jsdn537x"]
+[gd_scene load_steps=9 format=4 uid="uid://lxo6jsdn537x"]
 
 [ext_resource type="Script" path="res://addons/TileMapDual/TileMapDual.gd" id="1_3x0d3"]
 [ext_resource type="Texture2D" uid="uid://cvw27ok6bgyxo" path="res://assets/tileset_sand.png" id="1_wcmjl"]
 [ext_resource type="Texture2D" uid="uid://brh05u73qytuq" path="res://assets/tileset_grass.png" id="2_nfi75"]
 [ext_resource type="Texture2D" uid="uid://cboyfp0fxdjd5" path="res://assets/cursor.svg" id="3_586lt"]
 [ext_resource type="Script" path="res://addons/TileMapDual/CursorDual.gd" id="5_adfv3"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_346li"]
-light_mode = 2
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w4y0s"]
 texture = ExtResource("2_nfi75")
@@ -228,7 +225,7 @@ sources/24 = SubResource("TileSetAtlasSource_bhyym")
 [node name="MultipleAtlases" type="Node2D"]
 
 [node name="TileMapDual" type="TileMapLayer" parent="."]
-material = SubResource("CanvasItemMaterial_346li")
+self_modulate = Color(1, 1, 1, 0)
 tile_map_data = PackedByteArray("AAAGAAEAGAACAAEAAAAGAAAAGAACAAEAAAAFAAAAGAACAAEAAAAEAAAAGAACAAEAAAAEAP//GAACAAEAAAADAP//GAACAAEAAAACAP//GAACAAEAAAABAP//GAACAAEAAAAAAP7/GAACAAEAAAD///7/GAACAAEAAAD+//7/GAACAAEAAAD9//7/FwACAAEAAAD8//7/FwACAAEAAAD7//7/GAACAAEAAAD7////GAACAAEAAAD8////GAACAAEAAAD9/wAAGAACAAEAAAD+/wAAFwACAAEAAAD//wEAFwACAAEAAAAAAAEAGAACAAEAAAABAAEAGAACAAEAAAACAAEAGAACAAEAAAADAAEAGAACAAEAAAAEAAEAGAACAAEAAAAFAAEAGAACAAEAAAAHAAAAGAACAAEAAAADAAAAGAACAAEAAAACAAAAGAACAAEAAAAAAP//GAACAAEAAAD//wAAGAACAAEAAAD9/wEAFwACAAEAAAD9/wIAFwACAAEAAAD+/wMAFwACAAEAAAD//wMAFwACAAEAAAAAAAMAFwACAAEAAAABAAMAGAACAAEAAAACAAMAGAACAAEAAAADAAMAGAACAAEAAAAEAAMAGAACAAEAAAAFAAMAGAACAAEAAAAGAAMAGAACAAEAAAAHAAIAGAACAAEAAAAIAAIAGAACAAEAAAAIAAEAGAACAAEAAAAHAAEAGAACAAEAAAABAAAAGAACAAEAAAAAAAAAGAACAAEAAAD8/wEAGAACAAEAAAD7/wEAGAACAAEAAAD7/wIAFwACAAEAAAD6/wIAFwACAAEAAAD8/wIAFwACAAEAAAD9/wMAFwACAAEAAAD6/wMAGAACAAEAAAD7/wQAGAACAAEAAAD8/wQAGAACAAEAAAD9/wQAGAACAAEAAAAAAAIAFwACAAEAAAABAAIAGAACAAEAAAD/////FwACAAEAAAD+////FwACAAEAAAD8/wMAFwACAAEAAAD+/wQAFwACAAEAAAD//wQAFwACAAEAAAACAAIAGAACAAEAAAD+/wEAFwACAAEAAAD6/wQAGAACAAEAAAAAAAQAFwACAAEAAAD9////FwACAAEAAAD//wIAFwACAAEAAAD6/wEAFwACAAEAAAD5/wEAFwACAAEAAAD5/wAAFwACAAEAAAD4/wAAFwACAAEAAAD4////FwACAAEAAAD4//7/FwACAAEAAAA=")
 tile_set = SubResource("TileSet_mvne1")
 script = ExtResource("1_3x0d3")

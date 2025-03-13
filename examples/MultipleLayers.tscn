@@ -1,13 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://cnwj4w1kw380s"]
+[gd_scene load_steps=10 format=4 uid="uid://cnwj4w1kw380s"]
 
 [ext_resource type="Texture2D" uid="uid://cvw27ok6bgyxo" path="res://assets/tileset_sand.png" id="1_01gf2"]
 [ext_resource type="Texture2D" uid="uid://cboyfp0fxdjd5" path="res://assets/cursor.svg" id="1_gf7xt"]
 [ext_resource type="Script" path="res://addons/TileMapDual/TileMapDual.gd" id="2_7gf43"]
 [ext_resource type="Texture2D" uid="uid://brh05u73qytuq" path="res://assets/tileset_grass.png" id="3_4oenq"]
 [ext_resource type="Script" path="res://addons/TileMapDual/CursorDual.gd" id="4_500re"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y6ry6"]
-light_mode = 2
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jli7n"]
 texture = ExtResource("1_01gf2")
@@ -119,9 +116,6 @@ terrain_set_0/terrain_0/color = Color(0.933333, 0.509804, 0.933333, 1)
 terrain_set_0/terrain_1/name = "FG -tileset_sand.png"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 sources/3 = SubResource("TileSetAtlasSource_jli7n")
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ib6s2"]
-light_mode = 2
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ghwde"]
 texture = ExtResource("3_4oenq")
@@ -237,13 +231,13 @@ sources/1 = SubResource("TileSetAtlasSource_ghwde")
 [node name="MultipleLayers" type="Node2D"]
 
 [node name="Beach" type="TileMapLayer" parent="."]
-material = SubResource("CanvasItemMaterial_y6ry6")
+self_modulate = Color(1, 1, 1, 0)
 tile_map_data = PackedByteArray("AAAbAPj/AwACAAEAAAAcAPn/AwACAAEAAAAdAPn/AwACAAEAAAAbAPn/AwACAAEAAAAbAPr/AwACAAEAAAAdAPf/AwACAAEAAAAcAPf/AwACAAEAAAAdAPr/AwACAAEAAAAaAPn/AwACAAEAAAAbAPf/AwACAAEAAAAaAPj/AwACAAEAAAAbAPv/AwACAAEAAAAdAPv/AwACAAEAAAAcAPr/AwACAAEAAAAcAPj/AwAAAAMAAAAdAPj/AwAAAAMAAAAeAPj/AwAAAAMAAAA=")
 tile_set = SubResource("TileSet_cgyvj")
 script = ExtResource("2_7gf43")
 
 [node name="Grass" type="TileMapLayer" parent="."]
-material = SubResource("CanvasItemMaterial_ib6s2")
+self_modulate = Color(1, 1, 1, 0)
 tile_map_data = PackedByteArray("AAAeAPj/AQACAAEAAAAdAPj/AQACAAEAAAAcAPj/AQACAAEAAAA=")
 tile_set = SubResource("TileSet_fqw1s")
 script = ExtResource("2_7gf43")

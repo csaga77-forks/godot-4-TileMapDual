@@ -63,7 +63,8 @@ func update_properties(parent: TileMapDual) -> void:
 	self.modulate = parent.modulate
 	# Material
 	self.material = parent.display_material
-	
+
+	# TODO: display_modulate_a to make sure that 0 modulation is still possible to set
 	# Save any manually introduced alpha modulation:
 	if parent.self_modulate.a != 0.0:
 		self.self_modulate = parent.self_modulate

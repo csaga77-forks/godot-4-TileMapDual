@@ -43,7 +43,7 @@ func _atlas_autotiled(source_id: int, atlas: TileSetAtlasSource):
 
 ## Makes the main world grid invisible.
 ## The main tiles don't need to be seen. Only the DisplayLayers should be visible.
-## Called on ready.
+## Called every frame, and functions a lot like TileSetWatcher.
 func _make_self_invisible() -> void:
 	# If user has set a material in the original slot, copy it over for redundancy
 	# Helps both migration to new version, and prevents user mistakes
@@ -75,7 +75,6 @@ func _changed() -> void:
 	_display.update()
 	_make_self_invisible()
 
-	
 ## Public method to add and remove tiles.
 ##
 ## 'cell' is a vector with the cell position.

@@ -11,7 +11,9 @@ var terrain_neighborhood: Array = []
 ##[br] This Array stores the paths from the affected cell to the neighboring world cells.
 var display_to_world_neighborhood: Array
 
-## The rules that dictate which tile matches a given set of neighbors.
+# TODO: change Mapping to support https://github.com/pablogila/TileMapDual/issues/13
+##[br] The rules that dictate which tile matches a given set of neighbors.
+##[br] Used by register_rule() and apply_rule()
 ##[codeblock]
 ##  _rules: TrieNode = # The actual type of _rules
 ##
@@ -41,6 +43,8 @@ var display_to_world_neighborhood: Array
 ##[br]   - else pretend that neighbor is empty and try again
 ##[br]   - if there really isn't a branch, no rules exist so just return empty
 ##[br] - once at a leaf node, its mapping should tell us what terrain to become
+##[br]
+##[br] See apply_rule() for more details.
 var _rules: Dictionary = {}
 
 

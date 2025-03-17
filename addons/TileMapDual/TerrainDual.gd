@@ -1,5 +1,5 @@
-## Reads a TileSet and dictates which tiles in the display map
-## match up with its neighbors in the world map
+##[br] Reads a TileSet and dictates which tiles in the display map
+##[br] match up with its neighbors in the world map
 class_name TerrainDual
 extends Resource
 

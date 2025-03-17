@@ -1,5 +1,5 @@
-## A Node designed to hold and manage up to 2 DisplayLayer children.
-## See DisplayLayer.gd for details.
+##[br] A Node designed to hold and manage up to 2 DisplayLayer children.
+##[br] See DisplayLayer.gd for details.
 class_name Display
 extends Node2D
 
@@ -69,8 +69,8 @@ func update(layer: TileMapLayer):
 
 
 # TODO: phase out GridShape and simply transpose everything when the offset axis is vertical
-## Returns what kind of grid a TileSet is.
-## Will default to SQUARE if Godot decides to add a new TileShape.
+##[br] Returns what kind of grid a TileSet is.
+##[br] Will default to SQUARE if Godot decides to add a new TileShape.
 static func tileset_gridshape(tile_set: TileSet) -> GridShape:
 	var hori: bool = tile_set.tile_offset_axis == TileSet.TILE_OFFSET_AXIS_HORIZONTAL
 	match tile_set.tile_shape:
@@ -97,8 +97,8 @@ enum GridShape {
 }
 
 
-## How to deal with every available GridShape.
-## See DisplayLayer.gd for more information about these fields.
+##[br] How to deal with every available GridShape.
+##[br] See DisplayLayer.gd for more information about these fields.
 const GRIDS: Dictionary = {
 	GridShape.SQUARE: [
 		{ # []

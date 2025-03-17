@@ -1,13 +1,13 @@
-## A single TileMapLayer whose purpose is to display tiles to maintain the Dual Grid illusion.
-## Its contents are automatically computed and updated based on:
-## - the contents of the parent TileMapDual
-## - the rules set in its assigned TerrainLayer
+##[br] A single TileMapLayer whose purpose is to display tiles to maintain the Dual Grid illusion.
+##[br] Its contents are automatically computed and updated based on:
+##[br] - the contents of the parent TileMapDual
+##[br] - the rules set in its assigned TerrainLayer
 class_name DisplayLayer
 extends TileMapLayer
 
 
-## How much to offset this DisplayLayer relative to the main TileMapDual grid.
-## This is independent of tile size.
+##[br] How much to offset this DisplayLayer relative to the main TileMapDual grid.
+##[br] This is independent of tile size.
 var offset: Vector2
 
 ## See TileSetWatcher.gd

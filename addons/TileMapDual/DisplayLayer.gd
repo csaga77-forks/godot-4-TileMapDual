@@ -61,14 +61,10 @@ func update_properties(parent: TileMapDual) -> void:
 	self.visibility_layer = parent.visibility_layer
 	self.y_sort_enabled = parent.y_sort_enabled
 	self.modulate = parent.modulate
-	# Material
-	self.material = parent.display_material
 
-	# TODO: display_modulate_a to make sure that 0 modulation is still possible to set
-	# Save any manually introduced alpha modulation:
-	if parent.self_modulate.a != 0.0:
-		self.self_modulate = parent.self_modulate
-	# self_modulate will be fixed by the parent later
+	# Save any manually introduced Material and alpha modulation:
+	self.material = parent.display_material
+	self.self_modulate.a = parent.display_self_modulate_a
 
 
 ## Updates all display tiles to reflect the current changes.

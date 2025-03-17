@@ -5,12 +5,21 @@ extends TileMapLayer
 
 
 ## Material for the display tilemap.
-@export_custom(PROPERTY_HINT_RESOURCE_TYPE, "ShaderMaterial,CanvasItemMaterial")
+@export_custom(PROPERTY_HINT_RESOURCE_TYPE, "ShaderMaterial, CanvasItemMaterial")
 var display_material: Material:
 	get:
 		return display_material
 	set(new_material): # Custom setter so that it gets copied
 		display_material = new_material
+		changed.emit()
+
+## Slider for the real self modulation alpha
+## Lets the user set the alpha to zero
+@export_range(0.0, 1.0) var display_self_modulate_a: float = 1.0:
+	get:
+		return display_self_modulate_a
+	set(new_modulation):
+		display_self_modulate_a = new_modulation
 		changed.emit()
 
 var _tileset_watcher: TileSetWatcher
@@ -52,7 +61,9 @@ func _make_self_invisible() -> void:
 		material = null # Unset TileMapDual's material, to prevent render of it
 
 	# Override modulation to prevent render bugs with certain shaders
+	# Same with material
 	if self_modulate.a != 0.0:
+		display_self_modulate_a = self_modulate.a
 		self_modulate.a = 0.0
 
 ## HACK: How long to wait before processing another "frame"

@@ -32,9 +32,9 @@ func _atlas_autotiled(source_id: int, atlas: TileSetAtlasSource):
 	urm.commit_action()
 
 
-## Makes the main world grid invisible.
-## The main tiles don't need to be seen. Only the DisplayLayers should be visible.
-## Called on ready.
+##[br] Makes the main world grid invisible.
+##[br] The main tiles don't need to be seen. Only the DisplayLayers should be visible.
+##[br] Called on ready.
 func _make_self_invisible() -> void:
 	if material != null:
 		return
@@ -62,12 +62,12 @@ func _changed() -> void:
 	_display.update(self)
 
 
-## Public method to add and remove tiles.
-##
-## 'cell' is a vector with the cell position.
-## 'terrain' is which terrain type to draw.
-## terrain -1 completely removes the tile,
-## and by default, terrain 0 is the empty tile.
+##[br] Public method to add and remove tiles.
+##[br]
+##[br] - 'cell' is a vector with the cell position.
+##[br] - 'terrain' is which terrain type to draw.
+##[br] - terrain -1 completely removes the tile,
+##[br] - and by default, terrain 0 is the empty tile.
 func draw_cell(cell: Vector2i, terrain: int = 1) -> void:
 	var terrains := _display.terrain.terrains
 	if terrain not in terrains:

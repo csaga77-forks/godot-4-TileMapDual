@@ -3,23 +3,24 @@ class_name TileCache
 extends Resource
 
 
-## Maps a cell coordinate to the stored tile data
-##
-## Dictionary{
-##   key: Vector2i = The coordinates of this tile in the world grid.
-##   value: Dictionary{
-##     'sid': int = The Source ID of this tile.
-##     'tile': Vector2i = The coordinates of this tile in its Atlas.
-##     'terrain': int = The terrain assigned to this tile.
-##   } = The data stored at this tile.
-## }
+##[br] Maps a cell coordinate to the stored tile data.
+##[codeblock]
+##  Dictionary{
+##    key: Vector2i = # The coordinates of this tile in the world grid.
+##    value: Dictionary{
+##      'sid': int = # The Source ID of this tile.
+##      'tile': Vector2i = # The coordinates of this tile in its Atlas.
+##      'terrain': int = # The terrain assigned to this tile.
+##    } = # The data stored at this tile.
+##  }
+##[/codeblock]
 var cells := {}
 func _init() -> void:
 	pass
 
 
-## Computes a new TileCache based on the current layer data.
-## Needs the old TileCache in case corrections need to made due to accidents.
+##[br] Computes a new TileCache based on the current layer data.
+##[br] Needs the old TileCache in case corrections need to made due to accidents.
 func compute(tile_set: TileSet, layer: TileMapLayer, cache: TileCache) -> void:
 	if tile_set == null:
 		push_error('Attempted to construct TileCache while tile set was null')
@@ -61,8 +62,8 @@ func xor(other: TileCache) -> Array[Vector2i]:
 	return out
 
 
-## Returns the terrain value of the tile at the given cell coordinates.
-## Empty cells have a terrain of -1.
+##[br] Returns the terrain value of the tile at the given cell coordinates.
+##[br] Empty cells have a terrain of -1.
 func get_terrain_at(cell: Vector2i) -> int:
 	if cell not in cells:
 		return -1

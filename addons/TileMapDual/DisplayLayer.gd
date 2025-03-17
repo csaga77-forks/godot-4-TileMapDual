@@ -22,9 +22,8 @@ func _init(
 	fields: Dictionary,
 	layer: TerrainLayer
 ) -> void:
-	# TODO: clone all properties of world: TileMapDual
-	# possibly serialize the parent and use a for loop?
 	#print('initializing Layer...')
+	update_properties(world)
 	offset = fields.offset
 	_tileset_watcher = tileset_watcher
 	_terrain = layer

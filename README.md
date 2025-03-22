@@ -141,16 +141,14 @@ This plugin supports all the different tile shapes, layouts, and offset axes.
 Here's a rundown of all of them, with common mistakes and their corresponding fix:
 
 ALL PLUS NAME:
-![![Watch the video](https://raw.githubusercontent.com/pablogila/TileMapDual/main/docs/all_shapes_and_common_mistakes.mp4)](https://raw.githubusercontent.com/pablogila/TileMapDual/main/docs/all_shapes_and_common_mistakes.mp4)
+![![Watch the video](https://raw.githubusercontent.com/pablogila/TileMapDual/main/docs/v5_structure.png)](https://raw.githubusercontent.com/pablogila/TileMapDual/main/docs/all_shapes_and_common_mistakes.mp4)
 
 ALL:
-![![](https://raw.githubusercontent.com/pablogila/TileMapDual/main/docs/all_shapes_and_common_mistakes.mp4)](https://raw.githubusercontent.com/pablogila/TileMapDual/main/docs/all_shapes_and_common_mistakes.mp4)
+![![](https://raw.githubusercontent.com/pablogila/TileMapDual/main/docs/v5_structure.png)](https://raw.githubusercontent.com/pablogila/TileMapDual/main/docs/all_shapes_and_common_mistakes.mp4)
 
-OUT:
-![![]()](https://raw.githubusercontent.com/pablogila/TileMapDual/main/docs/all_shapes_and_common_mistakes.mp4)
+NO EXCLAMATION:
+[![Watch the video](https://raw.githubusercontent.com/pablogila/TileMapDual/main/docs/v5_structure.png)](https://raw.githubusercontent.com/pablogila/TileMapDual/main/docs/all_shapes_and_common_mistakes.mp4)
 
-IN:
-![![](https://raw.githubusercontent.com/pablogila/TileMapDual/main/docs/all_shapes_and_common_mistakes.mp4)]()
 
 You can then put hitboxes on the display tiles and logic such as pathing on the logical tiles.
 If your spritesheet doesn't follow the standard preset layout, you can manually set its terrains.

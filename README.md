@@ -140,7 +140,7 @@ This repo is currently managed by:
 This plugin supports all the different tile shapes, layouts, and offset axes.
 Here's a rundown of all of them, with common mistakes and their corresponding fix:
 
-![](docs/all_shapes_and_common_mistakes.gif)
+![](https://github.com/pablogila/TileMapDual/blob/main/docs/all_shapes_and_common_mistakes.mp4)
 
 
 You can then put hitboxes on the display tiles and logic such as pathing on the logical tiles.

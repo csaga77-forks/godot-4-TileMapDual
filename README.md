@@ -30,7 +30,7 @@ Welcome to *TileMapDual*: a simple, automatic and straightforward custom `TileMa
 
 This dual-grid system, [as explained by Oskar Stålberg](https://x.com/OskSta/status/1448248658865049605), reduces the number of tiles required from 47 to just 15 (yes, fifteen!!), rocketing your dev journey!  
 
-https://github.com/user-attachments/assets/78b9a0a7-2d17-465a-9488-84d8c0a4b2b2
+![](docs/demo_jess.gif)
 
 Not only that, but if your tiles are symmetrical, you can get away with drawing only 6 (six!) tiles and then generating the 15-tile-tilesets used by *TileMapDual*, thanks to tools like [Wang Tile Set Creator](https://github.com/kleingeist37/godot-wang-converter).  
 
@@ -38,7 +38,7 @@ Not only that, but if your tiles are symmetrical, you can get away with drawing 
 
 All grids are supported by TileMapDual. Square, isometric, hex... The only limit is your imagination!  
 
-https://github.com/user-attachments/assets/4df6758d-2013-479e-bb0b-eea87d064293
+![](docs/demo_iso.gif)
 
 Using a dual-grid system has the following advantages:  
 - Only [15](https://user-images.githubusercontent.com/47016402/87044518-ee28fa80-c1f6-11ea-86f5-de53e86fcbb6.png) tiles are required for autotiling, instead of [47](https://user-images.githubusercontent.com/47016402/87044533-f5e89f00-c1f6-11ea-9178-67b2e357ee8a.png)

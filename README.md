@@ -30,7 +30,7 @@ Welcome to *TileMapDual*: a simple, automatic and straightforward custom `TileMa
 
 This dual-grid system, [as explained by Oskar Stålberg](https://x.com/OskSta/status/1448248658865049605), reduces the number of tiles required from 47 to just 15 (yes, fifteen!!), rocketing your dev journey!  
 
-![](docs/demo_jess.gif)  
+![](docs/demo_jess.gif)
 
 Not only that, but if your tiles are symmetrical, you can get away with drawing only 6 (six!) tiles and then generating the 15-tile-tilesets used by *TileMapDual*, thanks to tools like [Wang Tile Set Creator](https://github.com/kleingeist37/godot-wang-converter).  
 
@@ -38,8 +38,7 @@ Not only that, but if your tiles are symmetrical, you can get away with drawing 
 
 All grids are supported by TileMapDual. Square, isometric, hex... The only limit is your imagination!  
 
-![](docs/demo_iso.gif)  
-
+![](docs/demo_iso.gif)
 
 Using a dual-grid system has the following advantages:  
 - Only [15](https://user-images.githubusercontent.com/47016402/87044518-ee28fa80-c1f6-11ea-86f5-de53e86fcbb6.png) tiles are required for autotiling, instead of [47](https://user-images.githubusercontent.com/47016402/87044533-f5e89f00-c1f6-11ea-9178-67b2e357ee8a.png)
@@ -61,8 +60,7 @@ Just copy the `addons/TileMapDual` folder to your Godot project, and enable it o
 TileMapDual is loaded in the same way as a regular `TileMapLayer` node.
 You have to create a `TileMapDual` node with your own tileset, and set it up with the appropriate tile shape and orientation, etc.
 
-![](docs/setup.gif)
-
+https://github.com/user-attachments/assets/2881ed29-fdb1-4954-a8f9-125d4168f455
 
 You can now start sketching your level with the fully-filled tile, indicated below for a square grid.
 You can also sketch with the empty tile in the bottom-left corner, or erase tiles as usual. The dual grid will update in real time as you draw! 
@@ -93,7 +91,7 @@ Check the first video on [FAQ and Troubleshoot](#faq-and-troubleshoot) to see ho
 
 To use more than two terrain types, it is highly encouraged to use multiple TileMapDual layers:
 
-![](docs/multiple_layers.gif)
+https://github.com/user-attachments/assets/f4c9bbb0-476b-448f-abae-ed5c36896cdb
 
 
 ### Collisions
@@ -104,7 +102,7 @@ To include extra data like collisions, pathing and such to your TileSet, it is r
 
 Here's how to set it up:
 
-![](docs/custom_drawing_sprites.gif)
+https://github.com/user-attachments/assets/d429e264-b59f-4d29-bc5b-ea487836d3ee
 
 
 ### TileMapDualLegacy stable version
@@ -140,36 +138,34 @@ This repo is currently managed by:
 This plugin supports all the different tile shapes, layouts, and offset axes.
 Here's a rundown of all of them, with common mistakes and their corresponding fix:
 
-![](docs/all_shapes_and_common_mistakes.gif)
+https://github.com/user-attachments/assets/f6d5e5fc-4c05-4396-a771-5b971a775e72
 
 
 You can then put hitboxes on the display tiles and logic such as pathing on the logical tiles.
 If your spritesheet doesn't follow the standard preset layout, you can manually set its terrains.
 Here is how to set up a Hexagonal Vertical tileset:
 
-![](docs/manual_hexagonal_terrain_setup.gif)
+https://github.com/user-attachments/assets/caf224cf-cd7d-471f-b3f2-495704c5b65e
 
 
 You can safely switch to a different tileset if you need to:
 
-![](docs/change_tilesets.gif)
+https://github.com/user-attachments/assets/cebe1b74-7e86-4961-8caa-1bab6195cb0e
 
 
 You can use multiple atlases in the same TileSet, with a few quirks if you don't set up the terrains properly:
 
-![](docs/multiple_atlases_conflict.gif)
+https://github.com/user-attachments/assets/777b4de7-29a0-479e-a992-2c9716cf0c64
 
 
 In case you make mistakes, you can edit the terrain configuration and see the results in real-time:
 
-![](docs/terrain_setup_live_feedback.gif)
+https://github.com/user-attachments/assets/cba869dd-6d97-4fc7-beec-95022f9227b0
 
 
 Some additional notes:
 - Terrain autogeneration does not work if you are editing a TileSet by itself from the assets folder. You must put it in a TileMapDual first.
 - It currently does not support alternative tiles.
-
-
 
 
 ## License

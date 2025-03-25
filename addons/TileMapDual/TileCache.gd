@@ -18,48 +18,39 @@ var cells := {}
 func _init() -> void:
 	pass
 
-
-##[br] Computes a new TileCache based on the current layer data.
-##[br] Needs the old TileCache in case corrections need to made due to accidents.
-func compute(tile_set: TileSet, layer: TileMapLayer, cache: TileCache) -> void:
+##[br] Updates specific cells of the TileCache based on the current layer data at those points.
+##[br] Makes corrections in case the user accidentally places invalid tiles.
+func update(world: TileMapLayer, edited: Array = cells.keys()) -> void:
+	var tile_set := world.tile_set
 	if tile_set == null:
-		push_error('Attempted to construct TileCache while tile set was null')
+		push_error('Attempted to update TileCache while tile set was null')
 		return
-	for cell in layer.get_used_cells():
+	for cell in edited:
 		# Invalid cells will be treated as empty and ignored
-		var sid := layer.get_cell_source_id(cell)
+		var sid := world.get_cell_source_id(cell)
+		if sid == -1:
+			cells.erase(cell)
+			continue
 		if not tile_set.has_source(sid):
 			continue
 		var src = tile_set.get_source(sid)
-		var tile := layer.get_cell_atlas_coords(cell)
+		var tile := world.get_cell_atlas_coords(cell)
 		if not src.has_tile(tile):
 			continue
-		var data := layer.get_cell_tile_data(cell)
+		var data := world.get_cell_tile_data(cell)
 		if data == null:
 			continue
 		# Accidental cells should be reset to their previous value
 		# They will be treated as unchanged
 		if data.terrain == -1 or data.terrain_set != 0:
-			if cell not in cache.cells:
-				layer.erase_cell(cell)
+			if cell not in cells:
+				world.erase_cell(cell)
 				continue
-			var cached: Dictionary = cache.cells[cell]
+			var cached: Dictionary = cells[cell]
 			sid = cached.sid
 			tile = cached.tile
-			layer.set_cell(cell, cached.sid, cached.tile)
+			world.set_cell(cell, cached.sid, cached.tile)
 		cells[cell] = {'sid': sid, 'tile': tile, 'terrain': data.terrain}
-
-
-## Returns the symmetric difference (xor) of two tile caches.
-func xor(other: TileCache) -> Array[Vector2i]:
-	var out: Array[Vector2i] = []
-	for key in cells:
-		if key not in other.cells or cells[key].terrain != other.cells[key].terrain:
-			out.push_back(key)
-	for key in other.cells:
-		if key not in cells:
-			out.push_back(key)
-	return out
 
 
 ##[br] Returns the terrain value of the tile at the given cell coordinates.

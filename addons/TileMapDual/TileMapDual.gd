@@ -59,7 +59,11 @@ func _process(delta: float) -> void: # Only used inside the editor
 ## or by _process inside the editor.
 func _changed() -> void:
 	_tileset_watcher.update(tile_set)
-	_display.update(self)
+
+
+## Called when the user draws on the map or presses undo/redo.
+func _update_cells(coords: Array[Vector2i], forced_cleanup: bool) -> void:
+	_display.update(coords)
 
 
 ##[br] Public method to add and remove tiles.

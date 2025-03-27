@@ -1,5 +1,7 @@
-# TileMapDual
+<p align="center"><img width="30.0%" src="docs/icon.png"></p>
 
+
+# TileMapDual
 
 ## IMPORTANT ANNOUNCEMENT
 
@@ -108,8 +110,7 @@ https://github.com/user-attachments/assets/d429e264-b59f-4d29-bc5b-ea487836d3ee
 ### TileMapDualLegacy stable version
 
 TileMapDual v5 was fully rewritten from the ground up. If you encounter issues, please report them on GitHub. For the time being, and to make the transition from v4 to v5 smoother, a custom `TileMapDualLegacy` node is available within the v5 version, containing the stable version from [v4.0.3](https://github.com/pablogila/TileMapDual/tree/v4.0.3).
-
-Note that the legacy version only supports square and isometric grids. On the contrary, support for material shaders is fully implemented in the legacy version, and the performance is better than for the v5 version.
+Note that this legacy version only supports square and isometric grids.
 
 
 ## Contributing

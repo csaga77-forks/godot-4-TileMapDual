@@ -83,3 +83,7 @@ func draw_cell(cell: Vector2i, terrain: int = 1) -> void:
 	var tile: Vector2i = tile_to_use.tile
 	set_cell(cell, sid, tile)
 	changed.emit()
+
+## Public method to get the terrain at a specific coordinate.
+func get_cell(cell: Vector2i) -> int:
+	return get_cell_tile_data(cell).terrain

@@ -83,7 +83,7 @@ func _process(delta: float) -> void: # Only used inside the editor
 ## or by _process inside the editor.
 func _changed() -> void:
 	_tileset_watcher.update(tile_set)
-	_display.update()
+	_display.update([])
 	_make_self_invisible()
 
 

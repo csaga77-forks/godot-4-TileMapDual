@@ -17,8 +17,7 @@ var _tileset_watcher: TileSetWatcher
 var _display: Display
 var _ghost_material: CanvasItemMaterial
 func _ready() -> void:
-	_ghost_material = CanvasItemMaterial.new()
-	_ghost_material.light_mode = CanvasItemMaterial.LightMode.LIGHT_MODE_LIGHT_ONLY
+	_create_ghost_material()
 	_tileset_watcher = TileSetWatcher.new(tile_set)
 	_display = Display.new(self, _tileset_watcher)
 	add_child(_display)
@@ -44,6 +43,23 @@ func _atlas_autotiled(source_id: int, atlas: TileSetAtlasSource):
 	urm.commit_action()
 
 
+## Called on ready.
+func _create_ghost_material() -> void:
+	if _is_ghost(material):
+		_ghost_material = material
+		return
+	_ghost_material = CanvasItemMaterial.new()
+	_ghost_material.light_mode = CanvasItemMaterial.LightMode.LIGHT_MODE_LIGHT_ONLY
+
+
+## Check if a material is invisible
+func _is_ghost(material: Material) -> bool:
+	return (
+		material is CanvasItemMaterial
+		and (material as CanvasItemMaterial).light_mode == CanvasItemMaterial.LightMode.LIGHT_MODE_LIGHT_ONLY
+	)
+
+
 ## Makes the main world grid invisible.
 ## The main tiles don't need to be seen. Only the DisplayLayers should be visible.
 ## Called on ready.
@@ -51,9 +67,9 @@ func _make_self_invisible() -> void:
 	# If user has set a material in the original slot, copy it over for redundancy
 	# Helps both migration to new version, and prevents user mistakes
 	if material != _ghost_material:
-		if display_material == null:
-			display_material = material
+		display_material = material
 		material = _ghost_material # Force TileMapDual's material to become invisible
+		# TODO: undo/redo... probably won't do
 
 
 ## HACK: How long to wait before processing another "frame"

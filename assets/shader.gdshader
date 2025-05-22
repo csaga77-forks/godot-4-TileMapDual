@@ -18,7 +18,7 @@ void fragment() {
     vec4 curr_color = texture(TEXTURE, UV);
 
     float dist_bg = distance(curr_color.rgb, bg_color.rgb);
-    if (dist_bg < tolerance) {
+    if (dist_bg <= tolerance) {
         discard;
     }
 
@@ -26,7 +26,7 @@ void fragment() {
     vec4 overlay_color = texture(overlay, scaled_position);
 
     float dist_fg = distance(curr_color.rgb, fg_color.rgb);
-    if (dist_fg < tolerance) {
+    if (dist_fg <= tolerance) {
         COLOR = overlay_color;
     }
 }

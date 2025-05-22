@@ -9,5 +9,4 @@ shader_parameter/overlay = ExtResource("2_j7m03")
 shader_parameter/fg_color = Color(1, 0, 0, 1)
 shader_parameter/bg_color = Color(0, 0, 0, 1)
 shader_parameter/tolerance = 0.1
-shader_parameter/scale = 0.007
 shader_parameter/tile_size = 144.0

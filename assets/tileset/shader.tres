@@ -1,9 +1,10 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://6h55aginnmsp"]
 
-[ext_resource type="Texture2D" uid="uid://ctvp8tarvuw2r" path="res://assets/shader-tileset.png" id="1_w18rg"]
+[ext_resource type="Texture2D" uid="uid://b12nreyobada4" path="res://assets/shader/shader-atlas.tres" id="1_w18rg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rovh4"]
 texture = ExtResource("1_w18rg")
+0:3/next_alternative_id = 2
 0:3/0 = 0
 0:3/0/terrain_set = 0
 0:3/0/terrain = 0
@@ -109,4 +110,6 @@ terrain_set_0/terrain_0/name = "<any>"
 terrain_set_0/terrain_0/color = Color(0.933333, 0.509804, 0.933333, 1)
 terrain_set_0/terrain_1/name = "FG -tileset_jess_shader.png"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
+terrain_set_0/terrain_2/name = "FG -shader-tileset.png"
+terrain_set_0/terrain_2/color = Color(0.46875, 0.5, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_rovh4")

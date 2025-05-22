@@ -4,6 +4,8 @@ class_name TileMapDual
 extends TileMapLayer
 
 
+var _ghost_material: Material = preload("res://addons/TileMapDual/ghost_material.tres")
+
 ## Material for the display tilemap.
 @export_custom(PROPERTY_HINT_RESOURCE_TYPE, "ShaderMaterial, CanvasItemMaterial")
 var display_material: Material:
@@ -15,9 +17,7 @@ var display_material: Material:
 
 var _tileset_watcher: TileSetWatcher
 var _display: Display
-var _ghost_material: CanvasItemMaterial
 func _ready() -> void:
-	_create_ghost_material()
 	_tileset_watcher = TileSetWatcher.new(tile_set)
 	_display = Display.new(self, _tileset_watcher)
 	add_child(_display)
@@ -41,23 +41,6 @@ func _atlas_autotiled(source_id: int, atlas: TileSetAtlasSource):
 	# NOTE: Atlas is guaranteed to have only been auto-generated with no extra peering bit information.
 	TerrainPreset.write_default_preset(urm, tile_set, atlas)
 	urm.commit_action()
-
-
-## Called on ready.
-func _create_ghost_material() -> void:
-	if _is_ghost(material):
-		_ghost_material = material
-		return
-	_ghost_material = CanvasItemMaterial.new()
-	_ghost_material.light_mode = CanvasItemMaterial.LightMode.LIGHT_MODE_LIGHT_ONLY
-
-
-## Check if a material is invisible
-func _is_ghost(material: Material) -> bool:
-	return (
-		material is CanvasItemMaterial
-		and (material as CanvasItemMaterial).light_mode == CanvasItemMaterial.LightMode.LIGHT_MODE_LIGHT_ONLY
-	)
 
 
 ## Makes the main world grid invisible.

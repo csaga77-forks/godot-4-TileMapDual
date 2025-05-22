@@ -1,13 +1,7 @@
-[gd_scene load_steps=5 format=4 uid="uid://dpiwxn1ckn0ov"]
+[gd_scene load_steps=3 format=4 uid="uid://dpiwxn1ckn0ov"]
 
 [ext_resource type="TileSet" uid="uid://xee4rh3e4gnk" path="res://assets/tileset/hex vert tall.tres" id="1_ydeiw"]
 [ext_resource type="Script" uid="uid://cjk8nronimk5r" path="res://addons/TileMapDual/TileMapDual.gd" id="2_64ayr"]
-
-[sub_resource type="SystemFont" id="SystemFont_k4wx3"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_hkky3"]
-font = SubResource("SystemFont_k4wx3")
-font_size = 48
 
 [node name="Custom Drawing Sprites" type="Node2D"]
 
@@ -16,14 +10,3 @@ self_modulate = Color(1, 1, 1, 0)
 tile_map_data = PackedByteArray("AAD///7/CAABAAAAAAD+////CAABAAAAAAD+/wAACAABAAAAAAD//wAACAABAAAAAAAAAAAACAABAAAAAAAAAP//CAABAAAAAAADAP7/CAAAAAAAAAACAP//CAAAAAAAAAACAAAACAAAAAAAAAADAAAACAAAAAAAAAAEAAAACAAAAAAAAAAEAP//CAAAAAAAAAA=")
 tile_set = ExtResource("1_ydeiw")
 script = ExtResource("2_64ayr")
-
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(14, -469)
-
-[node name="Label" type="Label" parent="Node2D"]
-offset_left = -350.0
-offset_top = 123.0
-offset_right = 1405.0
-offset_bottom = 252.0
-text = "Icons are broken with the latest shaders :("
-label_settings = SubResource("LabelSettings_hkky3")

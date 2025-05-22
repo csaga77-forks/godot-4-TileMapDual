@@ -4,6 +4,15 @@ class_name TileMapDual
 extends TileMapLayer
 
 
+## Material for the display tilemap.
+@export_custom(PROPERTY_HINT_RESOURCE_TYPE, "ShaderMaterial, CanvasItemMaterial")
+var display_material: Material:
+	get:
+		return display_material
+	set(new_material): # Custom setter so that it gets copied
+		display_material = new_material
+		changed.emit()
+
 ## Slider for the real self modulation alpha
 ## Lets the user set the alpha to zero
 @export_range(0.0, 1.0) var display_self_modulate_a: float = 1.0:
@@ -45,6 +54,12 @@ func _atlas_autotiled(source_id: int, atlas: TileSetAtlasSource):
 ## The main tiles don't need to be seen. Only the DisplayLayers should be visible.
 ## Called on ready.
 func _make_self_invisible() -> void:
+	# If user has set a material in the original slot, copy it over for redundancy
+	# Helps both migration to new version, and prevents user mistakes
+	if material != null:
+		display_material = material
+		material = null # Unset TileMapDual's material, to prevent render of it
+
 	# Override modulation to prevent render bugs with certain shaders
 	# Same with material
 	if self_modulate.a != 0.0:

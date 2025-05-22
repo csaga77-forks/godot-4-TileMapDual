@@ -7,7 +7,7 @@ uniform vec4 fg_color : source_color;
 uniform vec4 bg_color : source_color;
 uniform float tolerance : hint_range(0, 1);
 
-uniform float tile_size = 144.0;
+uniform float tile_size = 16.0;
 varying vec2 world_position;
 
 void vertex() {

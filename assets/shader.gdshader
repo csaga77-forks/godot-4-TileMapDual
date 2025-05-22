@@ -7,8 +7,8 @@ uniform vec4 fg_color : source_color;
 uniform vec4 bg_color : source_color;
 uniform float tolerance : hint_range(0,1);
 
-uniform float scale = 0.0078125; // calculated by 1/texture size e.g. 1/128
-uniform float tile_size = 32.0;
+uniform float scale = 0.006944444; // calculated by 1/texture size e.g. 1/144
+uniform float tile_size = 144.0;
 varying vec2 world_position;
 
 void vertex(){

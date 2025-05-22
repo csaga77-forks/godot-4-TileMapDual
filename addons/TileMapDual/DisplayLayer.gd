@@ -62,9 +62,8 @@ func update_properties(parent: TileMapDual) -> void:
 	self.modulate = parent.modulate
 	self.self_modulate = parent.self_modulate
 
-	# Save any manually introduced Material and alpha modulation:
+	# Save any manually introduced Material change:
 	self.material = parent.display_material
-	self.self_modulate.a = parent.display_self_modulate_a
 
 
 ## Updates all display tiles to reflect the current changes.

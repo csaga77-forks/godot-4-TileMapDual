@@ -13,18 +13,12 @@ var display_material: Material:
 		display_material = new_material
 		changed.emit()
 
-## Slider for the real self modulation alpha
-## Lets the user set the alpha to zero
-@export_range(0.0, 1.0) var display_self_modulate_a: float = 1.0:
-	get:
-		return display_self_modulate_a
-	set(new_modulation):
-		display_self_modulate_a = new_modulation
-		changed.emit()
-
 var _tileset_watcher: TileSetWatcher
 var _display: Display
+var _ghost_material: CanvasItemMaterial
 func _ready() -> void:
+	_ghost_material = CanvasItemMaterial.new()
+	_ghost_material.light_mode = CanvasItemMaterial.LightMode.LIGHT_MODE_LIGHT_ONLY
 	_tileset_watcher = TileSetWatcher.new(tile_set)
 	_display = Display.new(self, _tileset_watcher)
 	add_child(_display)
@@ -56,15 +50,11 @@ func _atlas_autotiled(source_id: int, atlas: TileSetAtlasSource):
 func _make_self_invisible() -> void:
 	# If user has set a material in the original slot, copy it over for redundancy
 	# Helps both migration to new version, and prevents user mistakes
-	if material != null:
-		display_material = material
-		material = null # Unset TileMapDual's material, to prevent render of it
+	if material != _ghost_material:
+		if display_material == null:
+			display_material = material
+		material = _ghost_material # Force TileMapDual's material to become invisible
 
-	# Override modulation to prevent render bugs with certain shaders
-	# Same with material
-	if self_modulate.a != 0.0:
-		display_self_modulate_a = self_modulate.a
-		self_modulate.a = 0.0
 
 ## HACK: How long to wait before processing another "frame"
 @export_range(0.0, 0.1) var refresh_time: float = 0.02

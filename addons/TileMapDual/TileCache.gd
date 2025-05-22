@@ -50,6 +50,7 @@ func update(world: TileMapLayer, edited: Array = cells.keys()) -> void:
 			sid = cached.sid
 			tile = cached.tile
 			world.set_cell(cell, cached.sid, cached.tile)
+			data = world.get_cell_tile_data(cell)
 		cells[cell] = {'sid': sid, 'tile': tile, 'terrain': data.terrain}
 
 

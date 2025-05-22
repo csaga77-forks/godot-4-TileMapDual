@@ -1,5 +1,5 @@
-## A Node designed to hold and manage up to 2 DisplayLayer children.
-## See DisplayLayer.gd for details.
+##[br] A Node designed to hold and manage up to 2 DisplayLayer children.
+##[br] See DisplayLayer.gd for details.
 class_name Display
 extends Node2D
 
@@ -22,6 +22,7 @@ func _init(world: TileMapDual, tileset_watcher: TileSetWatcher) -> void:
 
 ## Activates when the TerrainDual changes.
 func _terrain_changed() -> void:
+	cached_cells.update(world)
 	_delete_layers()
 	if _tileset_watcher.tile_set != null:
 		_create_layers()
@@ -55,18 +56,13 @@ func _delete_layers() -> void:
 
 ## The TileCache computed from the last time update() was called.
 var cached_cells := TileCache.new()
-## Updates the display based on the cells changed in the world.
-func update() -> void:
+## Updates the display based on the cells changed in the world TileMapDual.
+func update(updated: Array) -> void:
 	if _tileset_watcher.tile_set == null:
 		return
 	_update_properties()
-
-	var current := TileCache.new()
-	current.compute(_tileset_watcher.tile_set, world, cached_cells)
-	var updated := current.xor(cached_cells)
-	cached_cells = current
 	if not updated.is_empty():
-		#print(updated)
+		cached_cells.update(world, updated)
 		world_tiles_changed.emit(updated)
 
 
@@ -77,8 +73,8 @@ func _update_properties() -> void:
 
 
 # TODO: phase out GridShape and simply transpose everything when the offset axis is vertical
-## Returns what kind of grid a TileSet is.
-## Will default to SQUARE if Godot decides to add a new TileShape.
+##[br] Returns what kind of grid a TileSet is.
+##[br] Will default to SQUARE if Godot decides to add a new TileShape.
 static func tileset_gridshape(tile_set: TileSet) -> GridShape:
 	var hori: bool = tile_set.tile_offset_axis == TileSet.TILE_OFFSET_AXIS_HORIZONTAL
 	match tile_set.tile_shape:
@@ -105,8 +101,8 @@ enum GridShape {
 }
 
 
-## How to deal with every available GridShape.
-## See DisplayLayer.gd for more information about these fields.
+##[br] How to deal with every available GridShape.
+##[br] See DisplayLayer.gd for more information about these fields.
 const GRIDS: Dictionary = {
 	GridShape.SQUARE: [
 		{ # []

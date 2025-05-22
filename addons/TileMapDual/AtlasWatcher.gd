@@ -1,6 +1,6 @@
-## Watches a TileSetAtlasSource for changes.
-## Causes its 'parent' TileSetWatcher to emit terrains_changed when the atlas changes.
-## Also emits parent.atlas_autotiled when it thinks the user auto-generated atlas tiles.
+##[br] Watches a TileSetAtlasSource for changes.
+##[br] Causes its 'parent' TileSetWatcher to emit terrains_changed when the atlas changes.
+##[br] Also emits parent.atlas_autotiled when it thinks the user auto-generated atlas tiles.
 class_name AtlasWatcher
 
 ## Prevents the number of seen atlases from extending to infinity.
@@ -51,8 +51,8 @@ func _is_opaque_tile(image: Image, tile: Vector2i, p_threshold: float = 0.1) -> 
 	return false
 
 
-## HACK: literally just tries to guess which tiles the terrain autogen system would make
-## Called once, and only once, at the end of the first frame that a texture is created.
+##[br] HACK: literally just tries to guess which tiles the terrain autogen system would make
+##[br] Called once, and only once, at the end of the first frame that a texture is created.
 func _detect_autogen() -> void:
 	var size := Vector2i(atlas.texture.get_size()) / atlas.texture_region_size
 	var image := atlas.texture.get_image()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=4 uid="uid://dpiwxn1ckn0ov"]
 
 [ext_resource type="TileSet" uid="uid://xee4rh3e4gnk" path="res://assets/tileset/hex vert tall.tres" id="1_ydeiw"]
-[ext_resource type="Script" path="res://addons/TileMapDual/TileMapDual.gd" id="2_64ayr"]
+[ext_resource type="Script" uid="uid://cjk8nronimk5r" path="res://addons/TileMapDual/TileMapDual.gd" id="2_64ayr"]
 
 [node name="Custom Drawing Sprites" type="Node2D"]
 

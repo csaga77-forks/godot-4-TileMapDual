@@ -1,5 +1,5 @@
-## Real sets don't exist yet.
-## https://github.com/godotengine/godot/pull/94399
+##[br] Real sets don't exist yet.
+##[br] https://github.com/godotengine/godot/pull/94399
 class_name Set
 extends Resource
 

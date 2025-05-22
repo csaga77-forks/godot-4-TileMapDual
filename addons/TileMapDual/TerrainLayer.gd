@@ -6,12 +6,45 @@ extends Resource
 ## A list of which CellNeighbors to care about during terrain checking.
 var terrain_neighborhood: Array = []
 
-## When a cell in a DisplayLayer needs to be recomputed,
-## the TerrainLayer needs to know which tiles surround it.
-## This Array stores the paths from the affected cell to the neighboring world cells.
+##[br] When a cell in a DisplayLayer needs to be recomputed,
+##     the TerrainLayer needs to know which tiles surround it.
+##[br] This Array stores the paths from the affected cell to the neighboring world cells.
 var display_to_world_neighborhood: Array
 
-# TODO: document
+# TODO: change Mapping to support https://github.com/pablogila/TileMapDual/issues/13
+##[br] The rules that dictate which tile matches a given set of neighbors.
+##[br] Used by register_rule() and apply_rule()
+##[codeblock]
+##  _rules: TrieNode = # The actual type of _rules
+##
+##  TrieNode: Dictionary{
+##    key: int = # The terrain value of this neighbor
+##    value: TrieNode | TrieLeaf = # The next branch of this trie
+##  }
+## 
+##  TrieLeaf: Dictionary{
+##    'mapping': Mapping = # The tile that this should now become
+##  }
+##
+##  Mapping: Dictionary{
+##    'sid': int = # The source_id of this tile
+##    'tile': Vector2i = # The Atlas Coordinates of this tile
+##  }
+##[/codeblock]
+##[br] Internally a decision "trie":
+##[br] - each node branch represents a terrain neighbor
+##[br] - each leaf node represents the terrain that a tile
+##       with the given terrain neighborhood should become
+##[br] 
+##[br] How the trie is searched:
+##[br] - check the next neighbor in terrain_neighbors
+##[br] - check if there is a branch corresponding to the terrain of that neighbor
+##[br]   - if there is a branch, search again under that branch
+##[br]   - else pretend that neighbor is empty and try again
+##[br]   - if there really isn't a branch, no rules exist so just return empty
+##[br] - once at a leaf node, its mapping should tell us what terrain to become
+##[br]
+##[br] See apply_rule() for more details.
 var _rules: Dictionary = {}
 
 

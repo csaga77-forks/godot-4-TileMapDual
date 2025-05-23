@@ -227,10 +227,11 @@ tile_set = SubResource("TileSet_mse1m")
 script = ExtResource("1_3x0d3")
 metadata/_custom_type_script = "uid://cjk8nronimk5r"
 
-[node name="CursorDual" type="Sprite2D" parent="."]
+[node name="CursorDual" type="Sprite2D" parent="." node_paths=PackedStringArray("tilemap_dual")]
 position = Vector2(528, -257)
 texture = ExtResource("3_586lt")
 script = ExtResource("5_adfv3")
+tilemap_dual = NodePath("../TileMapDual")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -509.0

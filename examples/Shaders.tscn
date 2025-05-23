@@ -19,11 +19,9 @@ tile_map_data = PackedByteArray("AAAJABMAAAACAAEAAAAJABQAAAACAAEAAAAJABUAAAACAAE
 tile_set = ExtResource("2_h40s4")
 script = ExtResource("3_14orm")
 display_material = ExtResource("1_qtvuh")
-metadata/_custom_type_script = "uid://cjk8nronimk5r"
 
 [node name="CursorDual" type="Sprite2D" parent="." node_paths=PackedStringArray("tilemap_dual")]
 position = Vector2(908, 488)
 texture = ExtResource("6_pafva")
 script = ExtResource("7_ilpa3")
 tilemap_dual = NodePath("../Grass")
-metadata/_custom_type_script = "uid://c6m630v880okx"

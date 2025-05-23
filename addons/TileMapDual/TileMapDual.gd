@@ -43,9 +43,9 @@ func _atlas_autotiled(source_id: int, atlas: TileSetAtlasSource):
 	urm.commit_action()
 
 
-## Makes the main world grid invisible.
-## The main tiles don't need to be seen. Only the DisplayLayers should be visible.
-## Called on ready.
+##[br] Makes the main world grid invisible.
+##[br] The main tiles don't need to be seen. Only the DisplayLayers should be visible.
+##[br] Called every frame, and functions a lot like TileSetWatcher.
 func _make_self_invisible() -> void:
 	# If user has set a material in the original slot, copy it over for redundancy
 	# Helps both migration to new version, and prevents user mistakes

@@ -28,7 +28,7 @@ More info on the [v5 discussion](https://github.com/pablogila/TileMapDual/issues
 
 ## Introducing TileMapDual
 
-Welcome to *TileMapDual*: a simple, automatic and straightforward custom `TileMapLayer` node for [Godot](https://github.com/godotengine/godot) that provides a real-time, in-editor and in-game dual-grid tileset system, for **all kinds of grids**. Square, isometric, hex... The only limit is your imagination!  
+Welcome to *TileMapDual*: an automatic custom `TileMapLayer` node for [Godot](https://github.com/godotengine/godot) that provides a real-time, in-editor and in-game dual-grid tileset system, for **all kinds of grids**. Square, isometric, hex... The only limit is your imagination!  
 
 This dual-grid system, [as explained by Oskar Stålberg](https://x.com/OskSta/status/1448248658865049605), reduces the number of tiles required from 47 to just 15 (yes, fifteen!!), rocketing your dev journey!  
 

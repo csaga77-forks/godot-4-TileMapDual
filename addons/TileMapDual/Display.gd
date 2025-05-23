@@ -18,10 +18,12 @@ func _init(world: TileMapDual, tileset_watcher: TileSetWatcher) -> void:
 	terrain = TerrainDual.new(tileset_watcher)
 	terrain.changed.connect(_terrain_changed, 1)
 	world_tiles_changed.connect(_world_tiles_changed, 1)
+	# let parent materal through to the displaylayers
+	use_parent_material = true
 
 
 ## Activates when the TerrainDual changes.
-func _terrain_changed():
+func _terrain_changed() -> void:
 	cached_cells.update(world)
 	_delete_layers()
 	if _tileset_watcher.tile_set != null:
@@ -30,14 +32,14 @@ func _terrain_changed():
 
 ## Emitted when the tiles in the map have been edited.
 signal world_tiles_changed(changed: Array)
-func _world_tiles_changed(changed: Array):
+func _world_tiles_changed(changed: Array) -> void:
 	#print('SIGNAL EMITTED: world_tiles_changed(%s)' % {'changed': changed})
 	for child in get_children(true):
 		child.update_tiles(cached_cells, changed)
 
 
 ## Initializes and configures new DisplayLayers according to the grid shape.
-func _create_layers():
+func _create_layers() -> void:
 	#print('GRID SHAPE: %s' % _tileset_watcher.grid_shape)
 	var grid: Array = GRIDS[_tileset_watcher.grid_shape]
 	for i in grid.size():
@@ -49,7 +51,7 @@ func _create_layers():
 
 
 ## Deletes all of the DisplayLayers.
-func _delete_layers():
+func _delete_layers() -> void:
 	for child in get_children(true):
 		child.queue_free()
 
@@ -57,12 +59,19 @@ func _delete_layers():
 ## The TileCache computed from the last time update() was called.
 var cached_cells := TileCache.new()
 ## Updates the display based on the cells changed in the world TileMapDual.
-func update(updated: Array):
+func update(updated: Array) -> void:
 	if _tileset_watcher.tile_set == null:
 		return
+	_update_properties()
 	if not updated.is_empty():
 		cached_cells.update(world, updated)
 		world_tiles_changed.emit(updated)
+
+
+## Activates when the properties of the parent TileMapDual have been edited.
+func _update_properties() -> void:
+	for child in get_children(true):
+		child.update_properties(world)
 
 
 # TODO: phase out GridShape and simply transpose everything when the offset axis is vertical

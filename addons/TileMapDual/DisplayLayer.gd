@@ -22,9 +22,8 @@ func _init(
 	fields: Dictionary,
 	layer: TerrainLayer
 ) -> void:
-	# TODO: clone all properties of world: TileMapDual
-	# possibly serialize the parent and use a for loop?
 	#print('initializing Layer...')
+	update_properties(world)
 	offset = fields.offset
 	_tileset_watcher = tileset_watcher
 	_terrain = layer
@@ -36,6 +35,37 @@ func _init(
 ## Adjusts the position of this DisplayLayer based on the tile set's tile_size
 func reposition() -> void:
 	position = offset * Vector2(_tileset_watcher.tile_size)
+
+
+## Copies properties from parent TileMapDual to child display tilemap
+func update_properties(parent: TileMapDual) -> void:
+	# Both tilemaps must be the same, so we copy all relevant properties
+	# Tilemap
+	# already covered by parent._tileset_watcher
+	# Rendering
+	self.y_sort_origin = parent.y_sort_origin
+	self.x_draw_order_reversed = parent.x_draw_order_reversed
+	self.rendering_quadrant_size = parent.rendering_quadrant_size
+	# Physics
+	self.collision_enabled = parent.collision_enabled
+	self.use_kinematic_bodies = parent.use_kinematic_bodies
+	self.collision_visibility_mode = parent.collision_visibility_mode
+	# Navigation
+	self.navigation_enabled = parent.navigation_enabled
+	self.navigation_visibility_mode = parent.navigation_visibility_mode
+	# Canvas item properties
+	self.show_behind_parent = parent.show_behind_parent
+	self.top_level = parent.top_level
+	self.light_mask = parent.light_mask
+	self.visibility_layer = parent.visibility_layer
+	self.y_sort_enabled = parent.y_sort_enabled
+	self.modulate = parent.modulate
+	self.self_modulate = parent.self_modulate
+	# NOTE: parent material takes priority over the current shaders, causing the world tiles to show up
+	self.use_parent_material = parent.use_parent_material
+
+	# Save any manually introduced Material change:
+	self.material = parent.display_material
 
 
 ## Updates all display tiles to reflect the current changes.

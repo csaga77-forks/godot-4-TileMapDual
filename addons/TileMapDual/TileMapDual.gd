@@ -4,6 +4,17 @@ class_name TileMapDual
 extends TileMapLayer
 
 
+var _ghost_material: Material = preload("res://addons/TileMapDual/ghost_material.tres")
+
+## Material for the display tilemap.
+@export_custom(PROPERTY_HINT_RESOURCE_TYPE, "ShaderMaterial, CanvasItemMaterial")
+var display_material: Material:
+	get:
+		return display_material
+	set(new_material): # Custom setter so that it gets copied
+		display_material = new_material
+		changed.emit()
+
 var _tileset_watcher: TileSetWatcher
 var _display: Display
 func _ready() -> void:
@@ -15,8 +26,8 @@ func _ready() -> void:
 		_tileset_watcher.atlas_autotiled.connect(_atlas_autotiled, 1)
 		set_process(true)
 	else: # Run in-game using signals for better performance
-		set_process(false)
 		changed.connect(_changed, 1)
+		set_process(false)
 	# Update full tileset on first instance
 	await get_tree().process_frame
 	_changed()
@@ -32,14 +43,44 @@ func _atlas_autotiled(source_id: int, atlas: TileSetAtlasSource):
 	urm.commit_action()
 
 
+## Keeps track of use_parent_material to see when it turns on or off.
+var _cached_use_parent_material = null
 ##[br] Makes the main world grid invisible.
 ##[br] The main tiles don't need to be seen. Only the DisplayLayers should be visible.
-##[br] Called on ready.
+##[br] Called every frame, and functions a lot like TileSetWatcher.
 func _make_self_invisible() -> void:
-	if material != null:
-		return
-	material = CanvasItemMaterial.new()
-	material.light_mode = CanvasItemMaterial.LightMode.LIGHT_MODE_LIGHT_ONLY
+	# If user has set a material in the original slot, inform the user
+	if material != _ghost_material:
+		if Engine.is_editor_hint():
+			TileMapDualEditorPlugin.popup(
+				"Warning! Direct material edit detected.",
+				"Don't manually edit the real material in the editor! Instead edit the custom 'Display Material' property.\n" +
+				"(Resetting the material to an invisible shader material... this is to keep the 'World Layer' invisible)\n" +
+				"* This warning is only given when the material is set in the Godot editor.\n" +
+				"* In-game scripts may set the material directly. It will be copied over to display_material automatically."
+			)
+		else:
+			# copy over the material if it was edited by script
+			display_material = material
+		material = _ghost_material # Force TileMapDual's material to become invisible
+	
+	# check if use_parent_material is set
+	if (
+		Engine.is_editor_hint()
+		and use_parent_material != _cached_use_parent_material
+		and _cached_use_parent_material == false # cache may be null
+	):
+		TileMapDualEditorPlugin.popup(
+			"Warning: Using Parent Material.",
+			"The parent material will override any other materials used by the TileMapDual,\n" +
+			"including the 'ghost shader' that the world tiles use to hide themselves.\n" +
+			"This will cause the world tiles to show themselves in-game.\n" +
+			"\n" +
+			"* Recommendation: Turn this setting off. Don't use parent material.\n" +
+			"* Workaround: Set your world tiles to custom sprites that are entirely transparent.\n" +
+			"(see 'res://addons/TileMapDual/docs/custom_drawing_sprites.mp4' for a non-transparent example)"
+		)
+	_cached_use_parent_material = use_parent_material
 
 
 ## HACK: How long to wait before processing another "frame"
@@ -59,6 +100,8 @@ func _process(delta: float) -> void: # Only used inside the editor
 ## or by _process inside the editor.
 func _changed() -> void:
 	_tileset_watcher.update(tile_set)
+	_display.update([])
+	_make_self_invisible()
 
 
 ## Called when the user draws on the map or presses undo/redo.

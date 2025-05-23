@@ -47,12 +47,20 @@ func _atlas_autotiled(source_id: int, atlas: TileSetAtlasSource):
 ##[br] The main tiles don't need to be seen. Only the DisplayLayers should be visible.
 ##[br] Called every frame, and functions a lot like TileSetWatcher.
 func _make_self_invisible() -> void:
-	# If user has set a material in the original slot, copy it over for redundancy
-	# Helps both migration to new version, and prevents user mistakes
+	# If user has set a material in the original slot, inform the user
 	if material != _ghost_material:
-		display_material = material
+		if Engine.is_editor_hint():
+			TileMapDualEditorPlugin.popup(
+				"Warning! Direct material edit detected.",
+				"Don't manually edit the real material in the editor! Instead edit the custom 'Display Material' property.\n" +
+				"(Resetting the material to an invisible shader material... this is to keep the 'World Layer' invisible)\n" +
+				"* This warning is only given when the material is set in the Godot editor.\n" +
+				"* In-game scripts may set the material directly. It will be copied over to display_material automatically."
+			)
+		else:
+			# copy over the material if it was edited by script
+			display_material = material
 		material = _ghost_material # Force TileMapDual's material to become invisible
-		# TODO: undo/redo... probably won't do
 
 
 ## HACK: How long to wait before processing another "frame"

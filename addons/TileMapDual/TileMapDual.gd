@@ -43,6 +43,8 @@ func _atlas_autotiled(source_id: int, atlas: TileSetAtlasSource):
 	urm.commit_action()
 
 
+## Keeps track of use_parent_material to see when it turns on or off.
+var _cached_use_parent_material = null
 ##[br] Makes the main world grid invisible.
 ##[br] The main tiles don't need to be seen. Only the DisplayLayers should be visible.
 ##[br] Called every frame, and functions a lot like TileSetWatcher.
@@ -61,6 +63,24 @@ func _make_self_invisible() -> void:
 			# copy over the material if it was edited by script
 			display_material = material
 		material = _ghost_material # Force TileMapDual's material to become invisible
+	
+	# check if use_parent_material is set
+	if (
+		Engine.is_editor_hint()
+		and use_parent_material != _cached_use_parent_material
+		and _cached_use_parent_material == false # cache may be null
+	):
+		TileMapDualEditorPlugin.popup(
+			"Warning: Using Parent Material.",
+			"The parent material will override any other materials used by the TileMapDual,\n" +
+			"including the 'ghost shader' that the world tiles use to hide themselves.\n" +
+			"This will cause the world tiles to show themselves in-game.\n" +
+			"\n" +
+			"* Recommendation: Turn this setting off. Don't use parent material.\n" +
+			"* Workaround: Set your world tiles to custom sprites that are entirely transparent.\n" +
+			"(see 'res://addons/TileMapDual/docs/custom_drawing_sprites.mp4' for a non-transparent example)"
+		)
+	_cached_use_parent_material = use_parent_material
 
 
 ## HACK: How long to wait before processing another "frame"

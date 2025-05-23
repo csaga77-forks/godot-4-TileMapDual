@@ -18,6 +18,8 @@ func _init(world: TileMapDual, tileset_watcher: TileSetWatcher) -> void:
 	terrain = TerrainDual.new(tileset_watcher)
 	terrain.changed.connect(_terrain_changed, 1)
 	world_tiles_changed.connect(_world_tiles_changed, 1)
+	# let parent materal through to the displaylayers
+	use_parent_material = true
 
 
 ## Activates when the TerrainDual changes.

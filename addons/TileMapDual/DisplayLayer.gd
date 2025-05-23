@@ -61,6 +61,8 @@ func update_properties(parent: TileMapDual) -> void:
 	self.y_sort_enabled = parent.y_sort_enabled
 	self.modulate = parent.modulate
 	self.self_modulate = parent.self_modulate
+	# NOTE: parent material takes priority over the current shaders, causing the world tiles to show up
+	self.use_parent_material = parent.use_parent_material
 
 	# Save any manually introduced Material change:
 	self.material = parent.display_material

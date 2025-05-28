@@ -3,11 +3,14 @@
 class_name TileMapDual
 extends TileMapLayer
 
+
+## An invisible material used to hide the world grid so only the display layers show up.
+## Currently implemented as a shader that sets all pixels to 0 alpha.
 var _ghost_material: Material = preload("res://addons/TileMapDual/ghost_material.tres")
 
 
 # === External functions that don't exist once exported ===
-# HACK:this uses some sort of "Dynamic Linking" technique because these features don't exist:right now
+# HACK: this uses some sort of "Dynamic Linking" technique because these features don't exist right now
 # - conditional compilation
 # - static signals
 static func _editor_only(name: String):

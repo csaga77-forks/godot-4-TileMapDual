@@ -54,6 +54,18 @@ func update(world: TileMapLayer, edited: Array = cells.keys()) -> void:
 		cells[cell] = {'sid': sid, 'tile': tile, 'terrain': data.terrain}
 
 
+## Returns the symmetric difference (xor) of two tile caches.
+func xor(other: TileCache) -> Array[Vector2i]:
+	var out: Array[Vector2i] = []
+	for key in cells:
+		if key not in other.cells or cells[key].terrain != other.cells[key].terrain:
+			out.push_back(key)
+	for key in other.cells:
+		if key not in cells:
+			out.push_back(key)
+	return out
+
+
 ##[br] Returns the terrain value of the tile at the given cell coordinates.
 ##[br] Empty cells have a terrain of -1.
 func get_terrain_at(cell: Vector2i) -> int:

@@ -91,7 +91,8 @@ func _make_self_invisible(startup: bool = false) -> void:
 	_cached_use_parent_material = use_parent_material
 
 
-## HACK: How long to wait before processing another "frame"
+## HACK: How long to wait before processing another "frame".
+## Mainly matters when [godot_4_3_compatibility] is active.
 @export_range(0.0, 0.1) var refresh_time: float = 0.02
 var _timer: float = 0.0
 func _process(delta: float) -> void: # Only used inside the editor
@@ -103,12 +104,30 @@ func _process(delta: float) -> void: # Only used inside the editor
 	_timer = refresh_time
 	call_deferred('_changed')
 
+## When toggled on, double-checks ALL cells in the grid every change.
+## Only use this when running Godot 4.3 and below,
+## where TileMapLayer could not detect changes properly.
+@export var godot_4_3_compatibility: bool = _godot_is_below_4_4()
+
+## Detects if godot is below v4.4.
+## Only used to detect whether the _update_cells() function is usable.
+func _godot_is_below_4_4():
+	var version := Engine.get_version_info()
+	return version.major < 4 or version.major == 4 and version.minor < 4
 
 ## Called by signals when the tileset changes,
 ## or by _process inside the editor.
 func _changed() -> void:
 	_tileset_watcher.update(tile_set)
-	_display.update([])
+
+	var updated_cells := []
+	# HACK: double check all tiles every refresh
+	if godot_4_3_compatibility and tile_set != null:
+		var current_cells := TileCache.new()
+		current_cells.update(self, get_used_cells())
+		updated_cells = current_cells.xor(_display.cached_cells)
+
+	_display.update(updated_cells)
 	_make_self_invisible()
 
 

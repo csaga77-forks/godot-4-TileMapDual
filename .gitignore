@@ -4,3 +4,4 @@
 
 # we dont need to commit this every time
 test/
+*.DS_Store

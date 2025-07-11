@@ -2,7 +2,15 @@
 @icon('TileMapDual.svg')
 class_name TileMapDual
 extends TileMapLayer
-
+signal tile_updated(coords: Vector2i, source_id: int, atlas_coords: Vector2i)
+@export var boundary_rect: Rect2i:
+	set(value):
+		if boundary_rect == value:
+			return
+		boundary_rect = value
+		boundary_rect_changed.emit(boundary_rect)
+		
+signal boundary_rect_changed(boundary_rect)
 
 ## An invisible material used to hide the world grid so only the display layers show up.
 ## Currently implemented as a shader that sets all pixels to 0 alpha.
@@ -38,6 +46,7 @@ func _ready() -> void:
 		)
 	_tileset_watcher = TileSetWatcher.new(tile_set)
 	_display = Display.new(self, _tileset_watcher)
+	_display.tile_updated.connect(self.tile_updated.emit)
 	add_child(_display)
 	_make_self_invisible(true)
 	if Engine.is_editor_hint():

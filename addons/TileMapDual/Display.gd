@@ -1,7 +1,9 @@
 ##[br] A Node designed to hold and manage up to 2 DisplayLayer children.
 ##[br] See DisplayLayer.gd for details.
+@tool
 class_name Display
 extends Node2D
+signal tile_updated(coords: Vector2i, source_id: int, atlas_coords: Vector2i)
 var world_material : Material
 ## See TerrainDual.gd
 var terrain: TerrainDual
@@ -20,7 +22,6 @@ func _init(tilemap_dual_world: TileMapDual, tileset_watcher: TileSetWatcher) -> 
 	world_tiles_changed.connect(_world_tiles_changed, 1)
 	# let parent materal through to the displaylayers
 	use_parent_material = true
-
 
 ## Activates when the TerrainDual changes.
 func _terrain_changed() -> void:
@@ -50,7 +51,11 @@ func _create_layers() -> void:
 			#Using custom material.
 			#print("Display._create_layers() setting world_material to DisplayLayer.")
 			layer.material = world_material
-		
+			
+		world.boundary_rect_changed.connect(layer.set_world_boundary_rect)
+		layer.set_world_boundary_rect(world.boundary_rect)
+		if _tileset_watcher.grid_shape == Display.GridShape.SQUARE:
+			layer.tile_updated.connect(self.tile_updated.emit)
 		add_child(layer)
 		layer.update_tiles_all(cached_cells)
 

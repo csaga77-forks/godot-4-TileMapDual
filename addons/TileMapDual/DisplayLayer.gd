@@ -2,9 +2,18 @@
 ##[br] Its contents are automatically computed and updated based on:
 ##[br] - the contents of the parent TileMapDual
 ##[br] - the rules set in its assigned TerrainLayer
+@tool
 class_name DisplayLayer
 extends TileMapLayer
+@export var boundary_rect: Rect2i
+func set_world_boundary_rect(world_boundary_rect: Rect2i) -> void:
+	var display_boundary_rect: Rect2i
+	if world_boundary_rect.has_area():
+		display_boundary_rect = world_boundary_rect
+		display_boundary_rect.end = world_boundary_rect.end + Vector2i(1, 1)
+	boundary_rect = display_boundary_rect
 
+signal tile_updated(coords: Vector2i, source_id: int, atlas_coords: Vector2i)
 
 ##[br] How much to offset this DisplayLayer relative to the main TileMapDual grid.
 ##[br] This is independent of tile size.
@@ -92,8 +101,16 @@ func update_tile(cache: TileCache, cell: Vector2i) -> void:
 	var mapping: Dictionary = _terrain.apply_rule(terrain_neighbors)
 	var sid: int = mapping.sid
 	var tile: Vector2i = mapping.tile
-	set_cell(cell, sid, tile)
-
+	if !boundary_rect.has_area() or boundary_rect.has_point(cell):
+		#borderless or within the border
+		set_cell(cell, sid, tile)
+		tile_updated.emit(cell, sid, tile)
+	else:
+		#out of border
+		set_cell(cell, -1)
+		tile_updated.emit(cell, -1, Vector2i(-1, -1))
+	#set_cell(cell, sid, tile)
+	
 
 ## Finds the neighbor of a given cell by following a path of CellNeighbors
 func follow_path(cell: Vector2i, path: Array) -> Vector2i:

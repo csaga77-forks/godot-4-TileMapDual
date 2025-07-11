@@ -52,8 +52,18 @@ func _ready() -> void:
 
 
 ## Automatically generate terrains when the atlas is initialized.
-func _atlas_autotiled(source_id: int, atlas: TileSetAtlasSource):
-	autotile.call(source_id, atlas, tile_set)
+func _atlas_autotiled(_source_id: int, _atlas: TileSetAtlasSource):
+	pass
+	'''
+	Have to comment out the following EditorPlugin related lines in order to fix in an exported app:
+	
+	SCRIPT ERROR: Parse Error: Identifier "EditorPlugin" not declared in the current scope.
+	at: GDScript::reload (res://godot_tilemap/3rdparty/TileMapDual/TileMapDual.gd:34)
+	SCRIPT ERROR: Parse Error: Cannot infer the type of "urm" variable because the value doesn't have a set type.
+	at: GDScript::reload (res://godot_tilemap/3rdparty/TileMapDual/TileMapDual.gd:34)
+	SCRIPT ERROR: Parse Error: Could not resolve external class member "write_default_preset".
+	'''
+	#autotile.call(source_id, atlas, tile_set)
 	
 
 ## Keeps track of use_parent_material to see when it turns on or off.

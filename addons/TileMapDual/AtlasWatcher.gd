@@ -62,7 +62,7 @@ func _detect_autogen() -> void:
 			var tile := Vector2i(x, y)
 			if atlas.has_tile(tile) != _is_opaque_tile(image, tile):
 				return
-	parent.atlas_autotiled.emit(sid, atlas)
+	parent._emit_atlas_autotiled(sid, atlas)
 
 
 ## Called every time the atlas changes. Simply flags that terrains have changed.

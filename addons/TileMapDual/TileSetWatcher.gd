@@ -47,6 +47,8 @@ func _atlas_added(source_id: int, atlas: TileSetAtlasSource) -> void:
 ## 'Would you like to automatically create tiles in the atlas?'
 signal atlas_autotiled(source_id: int, atlas: TileSetAtlasSource)
 
+func _emit_atlas_autotiled(source_id: int, atlas: TileSetAtlasSource) -> void:
+	atlas_autotiled.emit(source_id, atlas)
 
 var _flag_terrains_changed := false
 ## Emitted when an atlas is added or removed,

@@ -20,7 +20,7 @@ static func transpose_vec(v: Vector2i) -> Vector2i:
 
 ## Reverses the direction of a CellNeighbor.
 static func reverse_neighbor(neighbor: TileSet.CellNeighbor) -> TileSet.CellNeighbor:
-	return (neighbor + 8) % 16
+	return (neighbor + 8) % 16 as TileSet.CellNeighbor
 
 
 ## Returns a shorthand name for a CellNeighbor.

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bth8306ui4dcx"
-path="res://.godot/imported/CursorDual.svg-af24e4bad2d22f0cc5627c83d35ae307.ctex"
+path="res://.godot/imported/CursorDual.svg-45d021703721f1e233c51bdb84638eed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/TileMapDual/CursorDual.svg"
-dest_files=["res://.godot/imported/CursorDual.svg-af24e4bad2d22f0cc5627c83d35ae307.ctex"]
+source_file="res://godot_tilemap/3rdparty/TileMapDual/CursorDual.svg"
+dest_files=["res://.godot/imported/CursorDual.svg-45d021703721f1e233c51bdb84638eed.ctex"]
 
 [params]
 

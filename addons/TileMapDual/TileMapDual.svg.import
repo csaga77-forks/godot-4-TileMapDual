@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bqu55yxko3ofm"
-path="res://.godot/imported/TileMapDual.svg-74ed91a3d196dbe51dce1133c9b2d6f7.ctex"
+path="res://.godot/imported/TileMapDual.svg-fe33386100c748e3ce4fe3d84227f2fe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/TileMapDual/TileMapDual.svg"
-dest_files=["res://.godot/imported/TileMapDual.svg-74ed91a3d196dbe51dce1133c9b2d6f7.ctex"]
+source_file="res://godot_tilemap/3rdparty/TileMapDual/TileMapDual.svg"
+dest_files=["res://.godot/imported/TileMapDual.svg-fe33386100c748e3ce4fe3d84227f2fe.ctex"]
 
 [params]
 

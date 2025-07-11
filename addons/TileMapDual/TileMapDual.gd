@@ -6,7 +6,7 @@ extends TileMapLayer
 
 ## An invisible material used to hide the world grid so only the display layers show up.
 ## Currently implemented as a shader that sets all pixels to 0 alpha.
-var _ghost_material: Material = preload("res://addons/TileMapDual/ghost_material.tres")
+var _ghost_material: Material = preload("res://godot_tilemap/3rdparty/TileMapDual/ghost_material.tres")
 
 
 # === External functions that don't exist once exported ===

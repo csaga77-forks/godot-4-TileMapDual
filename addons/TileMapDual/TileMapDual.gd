@@ -162,4 +162,6 @@ func draw_cell(cell: Vector2i, terrain: int = 1) -> void:
 
 ## Public method to get the terrain at a specific coordinate.
 func get_cell(cell: Vector2i) -> int:
+	if get_cell_tile_data(cell) == null:
+		return -1
 	return get_cell_tile_data(cell).terrain

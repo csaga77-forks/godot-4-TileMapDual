@@ -31,6 +31,11 @@ var display_material: Material:
 var _tileset_watcher: TileSetWatcher
 var _display: Display
 func _ready() -> void:
+	tree_exiting.connect(func():
+		if _tileset_watcher:
+			#need to call _tileset_watcher.release() otherwise will cause memory leak!
+			_tileset_watcher.release()
+		)
 	_tileset_watcher = TileSetWatcher.new(tile_set)
 	_display = Display.new(self, _tileset_watcher)
 	add_child(_display)

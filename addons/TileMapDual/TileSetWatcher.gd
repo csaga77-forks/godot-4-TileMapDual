@@ -2,6 +2,9 @@
 class_name TileSetWatcher
 extends Resource
 
+func release() -> void:
+	_cached_sids.clear()
+
 ## Caches the previous tile_set to see when it changes.
 var tile_set: TileSet
 ## Caches the previous tile_size to see when it changes.

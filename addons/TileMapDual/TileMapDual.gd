@@ -13,8 +13,8 @@ var _ghost_material: Material = preload("res://godot_tilemap/3rdparty/TileMapDua
 # HACK: this uses some sort of "Dynamic Linking" technique because these features don't exist right now
 # - conditional compilation
 # - static signals
-static func _editor_only(name: String):
-	push_error('Attempt to call Editor-Only function "' + name + '"')
+static func _editor_only(function_name: String):
+	push_error('Attempt to call Editor-Only function "' + function_name + '"')
 static var autotile: Callable = _editor_only.bind('autotile').unbind(3)
 static var popup: Callable = _editor_only.bind('popup').unbind(2)
 
@@ -137,7 +137,7 @@ func _changed() -> void:
 
 
 ## Called when the user draws on the map or presses undo/redo.
-func _update_cells(coords: Array[Vector2i], forced_cleanup: bool) -> void:
+func _update_cells(coords: Array[Vector2i], _forced_cleanup: bool) -> void:
 	if is_instance_valid(_display):
 		_display.update(coords)
 

@@ -35,18 +35,18 @@ static func neighborhood_str(neighborhood: Array) -> String:
 	for i in neighborhood.size():
 		neighbors[neighborhood[i]] = i
 
-	var get := func(neighbor: TileSet.CellNeighbor) -> String:
+	var get_func := func(neighbor: TileSet.CellNeighbor) -> String:
 		var terrain = neighbors[neighbor]
 		return '-' if terrain == -1 else str(terrain)
 
-	var nw = get.call(TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER)
-	var n = get.call(TileSet.CELL_NEIGHBOR_TOP_CORNER)
-	var ne = get.call(TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER)
-	var w = get.call(TileSet.CELL_NEIGHBOR_LEFT_CORNER)
-	var e = get.call(TileSet.CELL_NEIGHBOR_RIGHT_CORNER)
-	var sw = get.call(TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER)
-	var s = get.call(TileSet.CELL_NEIGHBOR_BOTTOM_CORNER)
-	var se = get.call(TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER)
+	var nw = get_func.call(TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER)
+	var n = get_func.call(TileSet.CELL_NEIGHBOR_TOP_CORNER)
+	var ne = get_func.call(TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER)
+	var w = get_func.call(TileSet.CELL_NEIGHBOR_LEFT_CORNER)
+	var e = get_func.call(TileSet.CELL_NEIGHBOR_RIGHT_CORNER)
+	var sw = get_func.call(TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER)
+	var s = get_func.call(TileSet.CELL_NEIGHBOR_BOTTOM_CORNER)
+	var se = get_func.call(TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER)
 
 	return (
 		"%2s %2s %2s\n" % [nw, n, ne] +

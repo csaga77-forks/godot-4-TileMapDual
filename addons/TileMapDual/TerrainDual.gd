@@ -193,7 +193,7 @@ func read_tile(atlas: TileSetAtlasSource, sid: int, tile: Vector2i) -> void:
 				"2nd: %s" % [mapping]
 			)
 		terrains[terrain] = mapping
-	var filters = NEIGHBORHOOD_LAYERS[neighborhood]
+	#var filters = NEIGHBORHOOD_LAYERS[neighborhood]
 	for i in layers.size():
 		var layer: TerrainLayer = layers[i]
 		layer._register_tile(data, mapping)

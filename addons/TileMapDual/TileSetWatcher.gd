@@ -12,13 +12,13 @@ var tile_size: Vector2i
 ## caches the previous result of display.tileset_grid_shape(tile_set) to see when it changes.
 var grid_shape: Display.GridShape
 
-func _init(tile_set: TileSet) -> void:
+func _init(target_tile_set: TileSet) -> void:
 	# tileset_deleted.connect(func(): print('tileset_deleted'), 1)
 	# tileset_created.connect(func(): print('tileset_created'), 1)
 	# tileset_resized.connect(func(): print('tileset_resized'), 1)
 	# tileset_reshaped.connect(func(): print('tileset_reshaped'), 1)
 	atlas_added.connect(_atlas_added, 1)
-	update(tile_set)
+	update(target_tile_set)
 
 
 var _flag_tileset_deleted := false
@@ -41,7 +41,7 @@ var _flag_atlas_added := false
 ## Emitted when a new Atlas is added to this TileSet.
 ## Does not react to Scenes being added to the TileSet.
 signal atlas_added(source_id: int, atlas: TileSetAtlasSource)
-func _atlas_added(source_id: int, atlas: TileSetAtlasSource) -> void:
+func _atlas_added(_source_id: int, _atlas: TileSetAtlasSource) -> void:
 	_flag_atlas_added = true
 	#print('SIGNAL EMITTED: atlas_added(%s)' % {'source_id': source_id, 'atlas': atlas})
 
@@ -62,8 +62,8 @@ signal terrains_changed
 
 ## Checks if anything about the concerned TileMapDual's tile_set changed.
 ## Must be called by the TileMapDual every frame.
-func update(tile_set: TileSet) -> void:
-	check_tile_set(tile_set)
+func update(target_tile_set: TileSet) -> void:
+	check_tile_set(target_tile_set)
 	check_flags()
 
 
@@ -97,15 +97,15 @@ func check_flags() -> void:
 
 
 ## Check if tile_set has been added, replaced, or deleted.
-func check_tile_set(tile_set: TileSet) -> void:
-	if tile_set == self.tile_set:
+func check_tile_set(target_tile_set: TileSet) -> void:
+	if target_tile_set == self.tile_set:
 		return
 	if self.tile_set != null:
 		self.tile_set.changed.disconnect(_set_tileset_changed)
 		_cached_source_count = 0
 		_cached_sids.clear()
 		_flag_tileset_deleted = true
-	self.tile_set = tile_set
+	self.tile_set = target_tile_set
 	if self.tile_set != null:
 		self.tile_set.changed.connect(_set_tileset_changed, 1)
 		self.tile_set.emit_changed()
@@ -123,13 +123,13 @@ func _set_tileset_changed() -> void:
 ## Called when _flag_tileset_changed.
 ## Provides more detail about what changed.
 func _update_tileset() -> void:
-	var tile_size = tile_set.tile_size
-	if self.tile_size != tile_size:
-		self.tile_size = tile_size
+	var current_tile_size = tile_set.tile_size
+	if self.tile_size != current_tile_size:
+		self.tile_size = current_tile_size
 		_flag_tileset_resized = true
-	var grid_shape = Display.tileset_gridshape(tile_set)
-	if self.grid_shape != grid_shape:
-		self.grid_shape = grid_shape
+	var new_grid_shape = Display.tileset_gridshape(tile_set)
+	if self.grid_shape != new_grid_shape:
+		self.grid_shape = new_grid_shape
 		_flag_tileset_reshaped = true
 	_update_tileset_atlases()
 

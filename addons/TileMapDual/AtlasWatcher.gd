@@ -17,18 +17,18 @@ var sid: int
 ## The atlas to be watched for changes.
 var atlas: TileSetAtlasSource
 
-func _init(parent: TileSetWatcher, sid: int, atlas: TileSetAtlasSource) -> void:
-	self.parent = parent
-	self.sid = sid
-	self.atlas = atlas
-	atlas.changed.connect(_atlas_changed, ConnectFlags.CONNECT_DEFERRED)
-	var id := atlas.get_instance_id()
+func _init(tileset_watcher_parent: TileSetWatcher, source_id: int, tileset_atlas_source: TileSetAtlasSource) -> void:
+	self.parent = tileset_watcher_parent
+	self.sid = source_id
+	self.atlas = tileset_atlas_source
+	tileset_atlas_source.changed.connect(_atlas_changed, ConnectFlags.CONNECT_DEFERRED)
+	var id := tileset_atlas_source.get_instance_id()
 	# should not autogen if atlas was created through redo, i.e. its instance id already existed
 	if _atlas_is_empty() and id not in _registered_atlases:
 		_registered_atlases.push_back(id)
 		if _registered_atlases.size() > UNDO_LIMIT:
 			_registered_atlases.pop_front()
-		atlas.changed.connect(_detect_autogen, ConnectFlags.CONNECT_DEFERRED | ConnectFlags.CONNECT_ONE_SHOT)
+		tileset_atlas_source.changed.connect(_detect_autogen, ConnectFlags.CONNECT_DEFERRED | ConnectFlags.CONNECT_ONE_SHOT)
 
 
 func _atlas_is_empty() -> bool:
@@ -56,7 +56,7 @@ func _is_opaque_tile(image: Image, tile: Vector2i, p_threshold: float = 0.1) -> 
 func _detect_autogen() -> void:
 	var size := Vector2i(atlas.texture.get_size()) / atlas.texture_region_size
 	var image := atlas.texture.get_image()
-	var expected_tiles := []
+	#var expected_tiles := []
 	for y in size.y:
 		for x in size.x:
 			var tile := Vector2i(x, y)
